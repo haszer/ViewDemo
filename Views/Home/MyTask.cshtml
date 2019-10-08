@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "MyTask";
+    Layout = "_Layout1";
+}
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+<div class="text-center">
+    <h1 class="display-4">@Model</h1>
+    <a id="ajax" href="#">查看日志</a>/<a id="closelog" href="#">关闭日志</a>
+    <div id="logger"></div>
+</div>
+<script>
+    $("#ajax").click(function () {
+        $.ajax({
+            type: "Get",
+            url: "/Home/getAjax",
+            contentType: "application/json;charset=utf-8",// 这句可不要忘了。
+            dataType: "json",
+            success: function (res) {
+                for (var i = 0; i < res.length; i++) {
+                    $("#logger").append(res[i]);
+                }
+                // 注意有个d，至于为什么通过chrome看响应吧，O(∩_∩)O。
+            },
+            error: function (xmlReq, err, c) {
+                $("#logger").text("日志获取失败");
+            }
+        });
+    });
+    $("#closelog").click(function () {
+        $("#logger").empty();
+    });
+</script>

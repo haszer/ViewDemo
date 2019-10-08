@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="row" style="background: #393D49; padding-top: 15px; padding-bottom: 30px;top: 0">
+        <div class="col-md-2 text-center">
+            <a style="color: white;font-size: 26px" href="#">Home</a>
+        </div>
+        <div class="col-md-10"></div>
+    </div>
+    <div class="row" style="">
+        <div id="menu" class="col-md-2" style="height: 100%;background: #393d49">
+            <ul>
+                <li id="li1" style="padding: 10px">菜单项1<span id="icon" style="float: right;font-size: 15px">+</span></li>
+                <li id="cli1" style="color: #d5d5d5;padding-left:15px ">&nbsp;&nbsp;子菜单项1</li>
+                <li id="cli2" style="color: #d5d5d5;padding-left:15px ">&nbsp;&nbsp;子菜单项2</li>
+                <li id="cli3" style="color: #d5d5d5;padding-left:15px ">&nbsp;&nbsp;子菜单项3</li>
+                <li style="padding: 10px">菜单项1</li>
+                <li style="padding: 10px">菜单项1</li>
+                <li style="padding: 10px">菜单项1</li>
+            </ul>
+        </div>
+        <div class="col-md-10" id="main" style="background: #e2e2e2; overflow-x: auto; overflow-y: auto;padding: 8px">
+            <div id="con" style="background: white; box-shadow: 0 0 10px #d5d5d5; overflow-y: auto;">
+                <div style="height: 10px"></div>
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    @*<footer class="border-top footer text-muted" style="bottom: ">
+            <div class="container">
+                &copy; 2019 - WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
+    <style>
+        ul {
+            list-style: none;
+            height: window.outerHeight;
+        }
+
+        li {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer
+        }
+
+            li:hover {
+                background: #009688;
+                color: #393d49;
+            }
+    </style>
+</body>
+<script>
+    $(function () {
+        var h = window.innerHeight;
+        $("#menu").height(h);
+        $("#main").height(h - 16);
+        $("#con").height(h - 16);
+        $("#cli1").hide();
+        $("#cli2").hide();
+        $("#cli3").hide();
+    });
+    var c = 0;
+    $("#li1").click(function () {
+        if (c === 0) {
+            $("#cli1").show();
+            $("#cli2").show();
+            $("#cli3").show();
+            $("#icon").text("-");
+            c = 1;
+        } else {
+            $("#cli1").hide();
+            $("#cli2").hide();
+            $("#cli3").hide();
+            $("#icon").text("+");
+            c = 0;
+        }
+        
+    });
+
+</script>
+</html>
